@@ -1,197 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noga Tech Systems</title>
+    <title>נגה טק סיסטמס</title>
     <style>
-        /* General Styles */
         body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            background-color: #f3f4f6;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #f3f4f6, #e6eef3);
-            color: # white;
         }
-
-        canvas {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        header img {
-            max-width: 300px;
-            height: auto;
-            margin: 20px auto;
-            display: block;
-        }
-
-        .content {
-            margin: 20px;
+        
+        header {
+            background-color: #fff;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        header img {
+            max-width: 200px;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .service {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 250px;
             text-align: center;
         }
-
-        .whatsapp-link {
+        
+        .service img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+        
+        .whatsapp-link, .contact-button {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #25D366;
-            color: white;
+            border-radius: 5px;
             font-size: 18px;
             text-decoration: none;
-            border-radius: 5px;
         }
-
+        
+        .whatsapp-link {
+            background-color: #25D366;
+            color: #fff;
+        }
+        
         .whatsapp-link:hover {
             background-color: #1da851;
         }
-
-        .services {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+        
+        .contact-button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
         }
-
-        .service {
-            width: 200px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
+        
+        .contact-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .contact-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
-
-        .service img {
-            width: 60px;
-            height: 60px;
-        }
-
-        .service h3 {
-            font-size: 18px;
+        
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
             margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .contact-form textarea {
+            max-length: 100;
         }
     </style>
 </head>
 <body>
-    <canvas id="background"></canvas>
-    <script>
-        const canvas = document.getElementById('background');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particles = [];
-
-        class Particle {
-            constructor(x, y, size, color, velocityX, velocityY) {
-                this.x = x;
-                this.y = y;
-                this.size = size;
-                this.color = color;
-                this.velocityX = velocityX;
-                this.velocityY = velocityY;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-                ctx.closePath();
-            }
-
-            update() {
-                this.x += this.velocityX;
-                this.y += this.velocityY;
-
-                if (this.x - this.size < 0 || this.x + this.size > canvas.width) this.velocityX *= -1;
-                if (this.y - this.size < 0 || this.y + this.size > canvas.height) this.velocityY *= -1;
-
-                this.draw();
-            }
-        }
-
-        function initParticles(count) {
-            for (let i = 0; i < count; i++) {
-                const size = Math.random() * 15 + 10;
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const color = 'rgba(173, 216, 230, 0.475)';
-                const velocityX = (Math.random() - 0.5) * 0.5;
-                const velocityY = (Math.random() - 0.5) * 0.5;
-
-                particles.push(new Particle(x, y, size, color, velocityX, velocityY));
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                particle.update();
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        initParticles(75);
-        animate();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles.length = 0;
-            initParticles(75);
-        });
-    </script>
-
     <header>
-        <img src="Noga-Tech.jpg" alt="Noga Tech Systems Logo">
+        <img src="logo.png" alt="Noga Tech Systems Logo">
     </header>
-
+    
     <div class="content">
         <h1>ברוכים הבאים לנגה טק סיסטמס</h1>
-        <p>
-            Priority נגה טק סיסטמס היא חברה מובילה בתחום שירותי המחשוב והטכנולוגיה בישראל. החברה מתמחה בפתרונות מותאמים אישית עם דגש מיוחד על שירות, ייעוץ ותמיכה במערכת Priority.<br>
-            אנו מתמקדים ביצירת פתרונות טכנולוגיים מתקדמים שמסייעים ללקוחותינו לשפר את תהליכי העבודה ולהשיג את מטרותיהם העסקיות.
-        </p>
+        <p>נגה טק סיסטמס היא חברה מובילה בתחום שירותי המחשוב והטכנולוגיה בישראל. החברה מתמחה בפתרונות מותאמים אישית עם דגש מיוחד על שירות, ייעוץ ותמיכה במערכת Priority. אנו מתמקדים ביצירת פתרונות טכנולוגיים מתקדמים שמסייעים ללקוחותינו לשפר את תהליכי העבודה ולהשיג את מטרותיהם העסקיות.</p>
+        
         <h2>השירותים שלנו:</h2>
         <div class="services">
-            <div class="service">
-                <img src="adjusted_image_1.png" alt="הטמעת Priority">
-                <h3>הטמעת Priority</h3>
-                <p>מתן פתרונות מותאמים אישית למערכת Priority.</p>
-            </div>
-            <div class="service">
-                <img src="adjusted_image_2.png" alt="ייעול תהליכים">
-                <h3>ייעול תהליכים</h3>
-                <p>אפיון ושיפור תהליכים עסקיים בעזרת המערכת.</p>
-            </div>
-            <div class="service">
-                <img src="adjusted_image_3.png" alt="הדרכות משתמשים">
-                <h3>הדרכות משתמשים</h3>
-                <p>הכשרה מלאה למשתמשי הקצה במודולים השונים.</p>
-            </div>
-            <div class="service">
-                <img src="adjusted_image_4.png" alt="תכנות מערכת Priority">
-                <h3>תכנות מערכת Priority</h3>
-                <p>פיתוח והתאמה אישית של מודולים במערכת Priority לפי צורכי הלקוח.</p>
-            </div>
+            <div class="service"><img src="service1.png" alt="הטמעת Priority"><h3>הטמעת Priority</h3><p>מתן פתרונות מותאמים אישית למערכת Priority.</p></div>
+            <div class="service"><img src="service2.png" alt="ייעול תהליכים"><h3>ייעול תהליכים</h3><p>אפיון ושיפור תהליכים עסקיים בעזרת המערכת.</p></div>
+            <div class="service"><img src="service3.png" alt="הדרכות משתמשים"><h3>הדרכות משתמשים</h3><p>הכשרה מלאה למשתמשי הקצה במודולים השונים.</p></div>
+            <div class="service"><img src="service4.png" alt="תכנות מערכת Priority"><h3>תכנות מערכת Priority</h3><p>פיתוח והתאמה אישית של מודולים במערכת Priority לפי צורכי הלקוח.</p></div>
         </div>
+        
         <a class="whatsapp-link" href="https://wa.me/0545610611" target="_blank">דברו איתנו בוואטסאפ</a>
+        <button class="contact-button" onclick="openContactForm()">צור קשר</button>
     </div>
+    
+    <div class="contact-form" id="contactForm">
+        <h2>צור קשר</h2>
+        <input type="text" placeholder="שם מלא">
+        <input type="text" placeholder="חברה">
+        <input type="tel" placeholder="טלפון">
+        <input type="email" placeholder="אימייל">
+        <textarea placeholder="הודעה (עד 100 תווים)" maxlength="100"></textarea>
+        <button onclick="submitContactForm()">שלח</button>
+        <button onclick="closeContactForm()">סגור</button>
+    </div>
+    
+    <script>
+        function openContactForm() {
+            document.getElementById('contactForm').style.display = 'block';
+        }
+        function closeContactForm() {
+            document.getElementById('contactForm').style.display = 'none';
+        }
+        function submitContactForm() {
+            alert('הודעה נשלחה בהצלחה!');
+            closeContactForm();
+        }
+    </script>
 </body>
 </html>
