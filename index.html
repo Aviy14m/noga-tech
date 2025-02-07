@@ -1,4 +1,5 @@
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noga Tech Systems</title>
@@ -10,7 +11,7 @@
             overflow: hidden;
             font-family: Arial, sans-serif;
             background: linear-gradient(120deg, #f3f4f6, #e6eef3);
-            color: # white;
+            color: black; /* צבע טקסט שחור */
         }
 
         canvas {
@@ -39,19 +40,37 @@
             text-align: center;
         }
 
-        .whatsapp-link {
+        .whatsapp-link, .contact-button {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #25D366;
-            color: white;
             font-size: 18px;
             text-decoration: none;
             border-radius: 5px;
+            width: 200px; /* גודל קבוע לשני הלחצנים */
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* צבע הלחצן "צור קשר" */
+        .contact-button {
+            background-color: #007BFF; /* צבע כחול */
+            color: white;
+            border: 2px solid #0056b3; /* גבול כהה */
+        }
+
+        .contact-button:hover {
+            background-color: #0056b3; /* צבע כהה בלחיצה */
+        }
+
+        /* צבע הלחצן "דברו איתנו בוואטסאפ" */
+        .whatsapp-link {
+            background-color: #25D366; /* ירוק */
+            color: white;
         }
 
         .whatsapp-link:hover {
-            background-color: #1da851;
+            background-color: #1da851; /* ירוק כהה */
         }
 
         .services {
@@ -80,23 +99,47 @@
             font-size: 18px;
             margin: 10px 0;
         }
+
+        /* Form Styles */
+        #contactForm {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            margin: 20px auto;
+        }
+
+        #contactForm h3 {
+            margin-top: 0;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"], button {
+            background-color: #007BFF; /* צבע כחול */
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover, button:hover {
+            background-color: #0056b3; /* כחול כהה */
+        }
+
     </style>
-<style type="text/css">
-@font-face {
-  font-weight: 400;
-  font-style:  normal;
-  font-family: circular;
-
-  src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Book.woff2') format('woff2');
-}
-
-@font-face {
-  font-weight: 700;
-  font-style:  normal;
-  font-family: circular;
-
-  src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Bold.woff2') format('woff2');
-}</style></head>
+</head>
 <body>
     <canvas id="background" width="1067" height="911"></canvas>
     <script>
@@ -169,6 +212,10 @@
             particles.length = 0;
             initParticles(75);
         });
+
+        function showContactForm() {
+            document.getElementById('contactForm').style.display = 'block';
+        }
     </script>
 
     <header>
@@ -204,9 +251,35 @@
                 <p>פיתוח והתאמה אישית של מודולים במערכת Priority לפי צורכי הלקוח.</p>
             </div>
         </div>
+      
         <a class="whatsapp-link" href="https://wa.me/0545610611" target="_blank">דברו איתנו בוואטסאפ</a>
-    
-  </div>
+        
+        <!-- צור קשר -->
+        <button class="contact-button" onclick="showContactForm()">צור קשר</button>
 
+        <!-- טופס צור קשר -->
+        <div id="contactForm">
+            <h3>צור קשר</h3>
+            <form action="send_email.php" method="POST">
+                <label for="name">שם:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
 
-<div id="priority-extension-is-installed-pre"></div><div id="loom-companion-mv3" ext-id="liecbddmkiiihnedobmlmillhodjkdmb"><section id="shadow-host-companion"></section></div><div id="priority-extension-is-installed"></div></body></html>
+                <label for="phone">טלפון:</label><br>
+                <input type="text" id="phone" name="phone" required><br><br>
+
+                <label for="email">מייל:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="message">הודעה:</label><br>
+                <textarea id="message" name="message" rows="4" cols="40" required></textarea><br><br>
+
+                <input type="submit" value="שלח">
+            </form>
+        </div>
+    </div>
+
+    <div id="priority-extension-is-installed-pre"></div>
+    <div id="loom-companion-mv3" ext-id="liecbddmkiiihnedobmlmillhodjkdmb"><section id="shadow-host-companion"></section></div>
+    <div id="priority-extension-is-installed"></div>
+</body>
+</html>
