@@ -168,6 +168,54 @@
             background-color: #0056b3; /* כחול כהה */
         }
 
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .content {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .whatsapp-link, .contact-button {
+                width: 100%; /* מתאימים לגודל המסך */
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            .service {
+                width: 45%;
+            }
+
+            .service img {
+                width: 50px;
+                height: 50px;
+            }
+
+            header img {
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .whatsapp-link, .contact-button {
+                width: 100%;
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .service {
+                width: 100%; /* כל שירות בתורו */
+            }
+
+            .service img {
+                width: 40px;
+                height: 40px;
+            }
+
+            header img {
+                max-width: 150px;
+            }
+        }
+
     </style>
 </head>
 <body>
