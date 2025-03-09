@@ -6,15 +6,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    // הגדרת המייל
-    $to = "avi@noga-tech.com";  // כתובת המייל שלך
+    $to = "avi@noga-tech.com"; 
     $subject = "צור קשר - פרטים חדשים";
     $body = "שם: $name\nטלפון: $phone\nמייל: $email\n\nהודעה:\n$message";
 
-    // כותרות המייל
     $headers = "From: " . $email;
 
-    // שליחת המייל
     if (mail($to, $subject, $body, $headers)) {
         echo "ההודעה נשלחה בהצלחה!";
     } else {
