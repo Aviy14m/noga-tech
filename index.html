@@ -8,15 +8,15 @@
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
             font-family: Arial, sans-serif;
             background: linear-gradient(120deg, #f3f4f6, #e6eef3);
             color: black; /* צבע טקסט שחור */
+            overflow-x: hidden; /* מניעת גלילה אופקית */
         }
 
         canvas {
             display: block;
-            position: absolute; /* שינוי מ-fixed ל-absolute */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -173,7 +173,7 @@
             }
 
             .whatsapp-link, .contact-button {
-                width: 100%; /* מתאימים לגודל המסך */
+                width: 100%; /* מתאים לגודל המסך */
                 font-size: 16px;
                 padding: 12px;
             }
