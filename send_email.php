@@ -11,8 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subject = "צור קשר - פרטים חדשים";
     $body = "שם: $name\nטלפון: $phone\nמייל: $email\n\nהודעה:\n$message";
 
+    // כותרות המייל
+    $headers = "From: " . $email;
+
     // שליחת המייל
-    if (mail($to, $subject, $body)) {
+    if (mail($to, $subject, $body, $headers)) {
         echo "ההודעה נשלחה בהצלחה!";
     } else {
         echo "הייתה בעיה בשליחת ההודעה.";
