@@ -16,7 +16,7 @@
 
         canvas {
             display: block;
-            position: absolute;
+            position: absolute; /* שינוי מ-fixed ל-absolute */
             top: 0;
             left: 0;
             width: 100%;
@@ -25,7 +25,7 @@
         }
 
         header img {
-            max-width: 100%;
+            max-width: 300px;
             height: auto;
             margin: 20px auto;
             display: block;
@@ -42,9 +42,9 @@
 
         .whatsapp-link, .contact-button {
             display: inline-block;
-            margin-top: 100%  /* מתאים לגודל המסך */;
-            padding: 12px 20px;
-            font-size: 16px;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
             text-decoration: none;
             border-radius: 5px;
             width: 200px; /* גודל קבוע לשני הלחצנים */
@@ -101,7 +101,6 @@
         }
 
         /* Modal Styles */
-        /* Style the Modal (hidden by default) */
         #contactForm {
             display: none;
             position: fixed;
@@ -115,7 +114,6 @@
             padding-top: 60px;
         }
 
-        /* Modal Content */
         .modal-content {
             background-color: white;
             margin: 5% auto;
@@ -130,7 +128,6 @@
             text-align: center;
         }
 
-        /* Style the close button */
         .close {
             color: #aaa;
             float: right;
@@ -295,7 +292,6 @@
             document.getElementById('contactForm').style.display = 'block';
         }
 
-        // Close the modal when the user clicks on <span> (x)
         function closeModal() {
             document.getElementById('contactForm').style.display = 'none';
         }
